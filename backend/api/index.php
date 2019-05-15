@@ -30,7 +30,7 @@ else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Write the result to the file, and return the sender's payload
   file_put_contents("./data", json_encode($data));
-  echo json_encode($_POST);
+  echo json_encode($data);
 }
 else {
   // Not a GET or POST, isn't supported
