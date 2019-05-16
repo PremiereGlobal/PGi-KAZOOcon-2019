@@ -34,19 +34,12 @@ This function authenticates the token in the X-Auth-Token header against the
 server specified in the config file
 */
 function authenticate() {
-  $config = json_decode(file_get_contents("./config/config"), true);
-  $api_location = $config["api_location"];
-  $authResult = validateAuthToken($api_location);
-
-  if ($authResult != 1) {
-    echo json_encode($authResult);
-    exit();
-  }
+  
 }
 
 /*
 This function takes the auth token and configures curl in order to receive
-whether or not the auth token was valid 
+whether or not the auth token was valid
 */
 function validateAuthToken($authApi) {
   $header = getallheaders();
