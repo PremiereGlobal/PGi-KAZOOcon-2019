@@ -14,14 +14,20 @@ define(function(require){
 
     		requests: {
 			'checkbox.setValue': {
-				apiRoot: '173.255.192.67/',
-				url: 'api/{X-Auth-token}',
-				verb: 'POST'
+				apiRoot: 'http://173.255.192.67/',
+				url: 'api/',
+				verb: 'POST',
+				headers: {
+					"X-Auth-Token": monster.util.getAuthToken()
+				}
 			},
 			'checkbox.getValue': {
-				apiRoot: '173.255.192.67/',
-				url: 'api/{X-Auth-Token}',
-				verb: 'GET'
+				apiRoot: 'http://173.255.192.67/',
+				url: 'api/',
+				verb: 'GET',
+				headers: {
+					"X-Auth-Token": monster.util.getAuthToken()
+				}
 			}
    		},
 
@@ -39,7 +45,6 @@ define(function(require){
 
     		initApp: function(callback) {
         		var self = this;
-			var check = self.isChecked;
 
         		monster.pub('auth.initApp', {
             			app: self,
@@ -69,12 +74,10 @@ define(function(require){
 				parent = args.container || $('.app-content'),
 				template = $(self.getTemplate({
 					name: 'checkbox',
-					data: {
-						user: monster.app.auth.currentUser,
-						check: self.getCheckboxValue();
-					}
 				}));
-			parent
+			self.bindEvents(template);			
+
+			(parent)
 				.fadeOut(function(){
 					$(this)
 						.empty()
@@ -87,7 +90,7 @@ define(function(require){
 			var self = this;
 
     			template.find('#check').on('click', function(e) {
-				self.setCheckbox;
+				self.isChecked();
     			});
 		},
 
@@ -96,24 +99,13 @@ define(function(require){
 
 			monster.request({
 				resource: 'checkbox.getValue',
-				data: {
-					X-Auth-Token: monster.util.getAuthToken;
-				},
 				success: function(response) {
-					if (response.data["data"]["button_checked"] === "unchecked"){
-						return false;
-					} else {
-						return true;
-					}
+					console.log(response);
 				},
 				error: function(response) {
-					monster.ui.alert('There was an error connecting to the api');
+					console.log(response);
 				}
 			});	
-		},
-
-		getCheckboxValue: function(){
-			return check;
 		},
 
 		setCheckbox: function(){
@@ -121,18 +113,11 @@ define(function(require){
 
 			monster.request({
 				resource: 'checkbox.setValue',
-				data: {
-					X-Auth-Token: monster.util.getAuthToken;
-				},
 				success: function(response) {
-					if (response.data["data"]["button_checked"] === "unchecked"){
-						check = false;
-					} else {
-						check = true;
-					}
+					console.log(response);
 				},
 				error: function(response){
-					monster.ui.alert('There was an error connecting to the api');
+					console.log(response);
 				},
 			});
 		}
