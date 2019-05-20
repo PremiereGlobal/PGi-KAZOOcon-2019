@@ -1,5 +1,6 @@
 <?php
 require_once("./functions.php");
+header("Access-Control-Allow-Origin: *")
 
 // Authenticate token
 $config = json_decode(file_get_contents("./config"), true);
