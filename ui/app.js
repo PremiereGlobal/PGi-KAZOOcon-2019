@@ -1,10 +1,12 @@
 define(function(require){
+
+	/*Required Libraries*/
 	var $ = require('jquery'),
    		_ = require('lodash'),
 		monster = require('monster');
 
 	var app = {
-   		name: 'ui',
+   		name: 'ui',	//Name of the app, change this to match the name of your app
 
 		css: [ 'app' ],
 
@@ -61,7 +63,12 @@ define(function(require){
 				]
 			});
 		},
-
+		/*
+ * 		
+ * 		This function renders the checkbox and get its data, it will
+ * 		wait for the data to be received first before it will render		
+ *
+ * 		*/
     		renderCheckbox: function(args){
 			var self = this,
 				data = args.data,
@@ -86,8 +93,8 @@ define(function(require){
 			monster.ui.insertTemplate($main_container, function(insertTemplateCallback){
 				monster.parallel({
 					getCheckboxstatus: function(callback){
-						self.isChecked({
-							success: function(response){
+						self.isChecked(
+							function(response){
 								if (response.data["button_state"] === "checked"){
 									var checkState = true;
 								} else {
@@ -95,7 +102,7 @@ define(function(require){
 								}
 								callback(null, checkState);
 							}
-						});
+						);
 					}
 				}, function(err,results){
 					insertTemplateCallback(initTemplate(results.getCheckboxStatus));
@@ -112,19 +119,31 @@ define(function(require){
 				self.setCheckbox();
     			});
 		},
-
+		
+		/*
+ *
+ * 		Function that gets that status of the checkbox
+ * 		success: function
+ *
+ * 		*/
 		isChecked: function(success){
 			var self = this;
 
 			monster.request({
 				resource: 'checkbox.getValue',
-				success: success["success"],
+				success: success,
 				error: function(response) {
 					console.log(response);
 				}
 			});	
 		},
 
+
+		/*
+ *
+ *		Function that toggles value between "checked" and "unchecked" for the checkbox
+ *
+ * 		*/
 		setCheckbox: function(){
 			var self = this;
 
