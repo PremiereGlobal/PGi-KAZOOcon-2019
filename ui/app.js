@@ -17,17 +17,11 @@ define(function(require){
 				apiRoot: 'http://173.255.192.67/',
 				url: 'api/',
 				verb: 'POST',
-				headers: {
-					"X-Auth-Token": monster.util.getAuthToken()
-				}
 			},
 			'checkbox.getValue': {
 				apiRoot: 'http://173.255.192.67/',
 				url: 'api/',
 				verb: 'GET',
-				headers: {
-					"X-Auth-Token": monster.util.getAuthToken()
-				}
 			}
    		},
 
@@ -68,40 +62,63 @@ define(function(require){
 			});
 		},
 
-    		renderCheckbox: function(pArgs){
+    		renderCheckbox: function(args){
 			var self = this,
-				args = pArgs || {},
-				parent = args.container || $('.app-content'),
-				template = $(self.getTemplate({
-					name: 'checkbox',
-				}));
-			self.bindEvents(template);			
-
-			(parent)
-				.fadeOut(function(){
-					$(this)
-						.empty()
-						.append(template)
-						.fadeIn();
+				data = args.data,
+				container = args.container,
+				$main_container = container.find('.app-content'),
+				initTemplate = function initTemplate(checkbox){
+					var template = $(self.getTemplate({
+						name: 'checkbox',
+						data: {
+							"checkboxstate": checkbox
+						}
+					}));
+					self.bindEvents(template);
+					(container)
+						.fadeOut(function(){
+							$(this)
+								.empty()
+								.append(template)
+								.fadeIn();
+						});
+				};
+			monster.ui.insertTemplate($main_container, function(insertTemplateCallback){
+				monster.parallel({
+					getCheckboxstatus: function(callback){
+						self.isChecked({
+							success: function(response){
+								if (response.data["button_state"] === "checked"){
+									var checkState = true;
+								} else {
+									var checkState = false;
+								}
+								callback(null, checkState);
+							}
+						});
+					}
+				}, function(err,results){
+					insertTemplateCallback(initTemplate(results.getCheckboxStatus));
 				});
+			},{
+				title: "Loading"
+			});
     		},
 
 		bindEvents: function(template){
 			var self = this;
 
     			template.find('#check').on('click', function(e) {
-				self.isChecked();
+				self.setCheckbox();
     			});
 		},
 
-		isChecked: function(){
+		isChecked: function(success){
 			var self = this;
 
 			monster.request({
 				resource: 'checkbox.getValue',
-				success: function(response) {
-					console.log(response);
-				},
+				success: success["success"],
 				error: function(response) {
 					console.log(response);
 				}
