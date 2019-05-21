@@ -15,6 +15,33 @@ the auth token in the `X-Auth-Token` header.
 }
 ```
 
+## Docker Deployment
+
+The backend includes a Dockerfile for easy building and deployment. To build
+the docker image, run `docker build -t <desired-image-name> .` while inside the
+`./backend` directory. For example, `docker build -t 2600 .`
+
+Now that the Docker image has been built, and all you have to do is run it. The
+command to do that is:
+```
+Options:
+    -d
+        Detached from the current terminal
+    -p
+        Publish container's port(s) to host port(s)
+
+docker run -dp <HOST_PORT>:<DOCKER_CONTAINER_PORT> <IMAGE_NAME>
+```
+
+For example, if you wanted to run the container (detached from the terminal)
+on the host's port 8080 and had called your Docker image `2600`, the command
+would be `docker run -dp 8080:80 2600`
+
+Once you're ready to shut down the container, you can run the command `docker ps`
+to see all running containers. Copy down the `CONTAINER_ID` of the container
+you want to kill, and then run the command `docker kill <CONTAINER_ID>` to kill
+the container.
+
 ## Endpoints
 
 ### `/api/` : `GET`
