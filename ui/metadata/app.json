@@ -12,7 +12,7 @@
 	"tags": [
 		"end_user"
 	],
-	"icon": "ui_callflows_app.png",
+	"icon": "Callflows_app.png",
 	"api_url": "//10.26.0.21:8000/v2",
 	"author": "2600Hz",
 	"version": "1.0",
