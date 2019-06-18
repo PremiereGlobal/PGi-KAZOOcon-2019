@@ -6,7 +6,7 @@ define(function(require){
 		monster = require('monster');
 
 	var app = {
-   		name: 'ui',	//Name of the app, change this to match the name of your app
+		name: 'hackathon2019',	//Name of the app, change this to match the name of your app
 
 		css: [ 'app' ],
 
@@ -16,12 +16,12 @@ define(function(require){
 
     		requests: {
 			'checkbox.setValue': {
-				apiRoot: 'http://173.255.192.67/',
+				apiRoot: 'http://127.0.0.1:8080/',
 				url: 'api/',
 				verb: 'POST',
 			},
 			'checkbox.getValue': {
-				apiRoot: 'http://173.255.192.67/',
+				apiRoot: 'http://127.0.0.1:8080/',
 				url: 'api/',
 				verb: 'GET',
 			}
