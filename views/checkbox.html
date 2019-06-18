@@ -3,7 +3,7 @@
 	<ul class="ongoing-calls">
 		{{#each calls}}
 			<li class="call">
-				<span class="origin"></span>&gt;---&lt;<span class="receiver"></span><button class="spy">Spy</button>
+				<span class="origin">Destination: {{destination}} Duration: {{elapsed_s}}</span><button class="spy" id="{{uuid}}">Spy</button>
 			</li>
 		{{/each}}
 	</ul>

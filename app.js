@@ -88,21 +88,25 @@ define(function(require){
 				};
 				console.log("container", args.container);
 				console.log("container find", container.find('.app-content').length);
-				monster.request({
-					resource: "channels.getCalls",
-					success: function(res) {
-						console.log("res", res);
-						monster.ui.insertTemplate($main_container, function(insertTemplateCallback) {
-							var call_list = [];
-							insertTemplateCallback(initTemplate(call_list));
-						},{
-							title: "Loading"
-						});
-					},
-					error: function(err) {
-						console.log("WTF", arguments);
-					}
-				})
+				var checkCalls = function() {
+					monster.request({
+						resource: "channels.getCalls",
+						success: function(res) {
+							console.log("res", res);
+							monster.ui.insertTemplate($main_container, function(insertTemplateCallback) {
+								var call_list = res.data;
+								insertTemplateCallback(initTemplate(call_list));
+							},{
+								title: "Loading"
+							});
+						},
+						error: function(err) {
+							console.log("WTF", arguments);
+						}
+					})
+				};
+				checkCalls();
+				setInterval(checkCalls, 5000);
     		},
 
 		bindEvents: function(template){
