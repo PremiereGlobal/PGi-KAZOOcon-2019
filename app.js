@@ -76,10 +76,12 @@ define(function(require){
 				data = args.data,
 				container = args.container,
 				$main_container = container.find('.app-content'),
-				initTemplate = function initTemplate(){
-					console.log("xyz");
+				initTemplate = function initTemplate(call_list){
 					var template = $(self.getTemplate({
-						name: 'checkbox'
+						name: 'checkbox',
+						data: {
+							"calls": call_list
+						}
 					}));
 					self.bindEvents(template);
 					(container)
@@ -92,8 +94,9 @@ define(function(require){
 				};
 				console.log("container", args.container);
 				console.log("container find", container.find('.app-content').length);
-			monster.ui.insertTemplate($main_container, function(insertTemplateCallback){
-					insertTemplateCallback(initTemplate());
+			monster.ui.insertTemplate($main_container, function(insertTemplateCallback) {
+				var call_list = [];
+				insertTemplateCallback(initTemplate(call_list));
 			},{
 				title: "Loading"
 			});

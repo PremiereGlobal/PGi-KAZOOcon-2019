@@ -1,9 +1,11 @@
 <div class="app-content">
 	<h2>Ongoing Calls</h2>
 	<ul class="ongoing-calls">
-		<li class="call">
-			<span class="origin"></span>&gt;---&lt;<span class="receiver"></span><button class="spy">Spy</button>
-		</li>
+		{{#each calls}}
+			<li class="call">
+				<span class="origin"></span>&gt;---&lt;<span class="receiver"></span><button class="spy">Spy</button>
+			</li>
+		{{/each}}
 	</ul>
 	<div class="softphone">
 	</div>
