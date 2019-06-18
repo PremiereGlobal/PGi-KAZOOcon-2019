@@ -76,12 +76,10 @@ define(function(require){
 				data = args.data,
 				container = args.container,
 				$main_container = container.find('.app-content'),
-				initTemplate = function initTemplate(checkbox){
+				initTemplate = function initTemplate(){
+					console.log("xyz");
 					var template = $(self.getTemplate({
-						name: 'checkbox',
-						data: {
-							"checkboxstate": checkbox
-						}
+						name: 'checkbox'
 					}));
 					self.bindEvents(template);
 					(container)
@@ -92,24 +90,10 @@ define(function(require){
 								.fadeIn();
 						});
 				};
+				console.log("container", args.container);
 				console.log("container find", container.find('.app-content').length);
 			monster.ui.insertTemplate($main_container, function(insertTemplateCallback){
-				monster.parallel({
-					getCheckboxstatus: function(callback){
-						self.isChecked(
-							function(response){
-								if (response.data["button_state"] === "checked"){
-									var checkState = true;
-								} else {
-									var checkState = false;
-								}
-								callback(null, checkState);
-							}
-						);
-					}
-				}, function(err,results){
-					insertTemplateCallback(initTemplate(results.getCheckboxStatus));
-				});
+					insertTemplateCallback(initTemplate());
 			},{
 				title: "Loading"
 			});
