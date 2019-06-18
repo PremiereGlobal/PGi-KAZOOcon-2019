@@ -14,20 +14,14 @@ define(function(require){
         		'en-US': { customCss: false }
    		 },
 
-    		// requests: {
-			// 'checkbox.setValue': {
-			// 	apiRoot: 'http://127.0.0.1:8080/',
-			// 	url: 'api/',
-			// 	verb: 'POST',
-			// },
-			// 'checkbox.getValue': {
-			// 	apiRoot: 'http://127.0.0.1:8080/',
-			// 	url: 'api/',
-			// 	verb: 'GET',
-			// }
-   		// },
+		requests: {
+			'channels.getCalls': {
+				url: 'accounts/39f3312cbebe116e3fb2d522a151739d/channels/',
+				verb: 'GET'
+			}
+		},
 
-    		subscribe: {
+		subscribe: {
         		/* List of events */
    		},
 
@@ -94,12 +88,21 @@ define(function(require){
 				};
 				console.log("container", args.container);
 				console.log("container find", container.find('.app-content').length);
-			monster.ui.insertTemplate($main_container, function(insertTemplateCallback) {
-				var call_list = [];
-				insertTemplateCallback(initTemplate(call_list));
-			},{
-				title: "Loading"
-			});
+				monster.request({
+					resource: "channels.getCalls",
+					success: function(res) {
+						console.log("res", res);
+						monster.ui.insertTemplate($main_container, function(insertTemplateCallback) {
+							var call_list = [];
+							insertTemplateCallback(initTemplate(call_list));
+						},{
+							title: "Loading"
+						});
+					},
+					error: function(err) {
+						console.log("WTF", arguments);
+					}
+				})
     		},
 
 		bindEvents: function(template){
