@@ -6,7 +6,7 @@ define(function(require){
 		monster = require('monster');
 
 	var app = {
-		name: 'hackathon2019',	//Name of the app, change this to match the name of your app
+		name: 'snowden',	//Name of the app, change this to match the name of your app
 
 		css: [ 'app' ],
 
@@ -14,18 +14,18 @@ define(function(require){
         		'en-US': { customCss: false }
    		 },
 
-    		requests: {
-			'checkbox.setValue': {
-				apiRoot: 'http://127.0.0.1:8080/',
-				url: 'api/',
-				verb: 'POST',
-			},
-			'checkbox.getValue': {
-				apiRoot: 'http://127.0.0.1:8080/',
-				url: 'api/',
-				verb: 'GET',
-			}
-   		},
+    		// requests: {
+			// 'checkbox.setValue': {
+			// 	apiRoot: 'http://127.0.0.1:8080/',
+			// 	url: 'api/',
+			// 	verb: 'POST',
+			// },
+			// 'checkbox.getValue': {
+			// 	apiRoot: 'http://127.0.0.1:8080/',
+			// 	url: 'api/',
+			// 	verb: 'GET',
+			// }
+   		// },
 
     		subscribe: {
         		/* List of events */
@@ -33,8 +33,9 @@ define(function(require){
 
     		load: function(callback){
         		var self = this;
-
+				console.log("howdy");
         		self.initApp(function() {
+
             			callback && callback(self);
         		});
     		},
@@ -69,7 +70,8 @@ define(function(require){
  * 		wait for the data to be received first before it will render		
  *
  * 		*/
-    		renderCheckbox: function(args){
+			renderCheckbox: function(args){
+				console.log("render checkbox");
 			var self = this,
 				data = args.data,
 				container = args.container,
@@ -90,6 +92,7 @@ define(function(require){
 								.fadeIn();
 						});
 				};
+				console.log("container find", container.find('.app-content').length);
 			monster.ui.insertTemplate($main_container, function(insertTemplateCallback){
 				monster.parallel({
 					getCheckboxstatus: function(callback){
@@ -128,7 +131,7 @@ define(function(require){
  * 		*/
 		isChecked: function(success){
 			var self = this;
-
+			return true;
 			monster.request({
 				resource: 'checkbox.getValue',
 				success: success,
@@ -146,7 +149,7 @@ define(function(require){
  * 		*/
 		setCheckbox: function(){
 			var self = this;
-
+			return true;
 			monster.request({
 				resource: 'checkbox.setValue',
 				success: function(response) {
