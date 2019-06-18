@@ -1,32 +1,27 @@
 {
 	"name": "hackathon2019",
 	"i18n": {
-		},
 		"en-US": {
-			"label": "Hackathon2019",
-			"description": "KazooCon 2019 Hackathon Skeleton",
+			"label": "KazooCon 2019",
+			"description": "Demo App",
+			"extended_description": "...",
 			"features": [
 			]
 		}
 	},
 	"tags": [
-		"admin"
+		"end_user"
 	],
-	"icon": "Callflows_app.png",
-	"api_url": "http://127.0.0.1:8080/api",
+	"icon": "ui_callflows_app.png",
+	"api_url": "//10.26.0.21:8000/v2",
 	"author": "2600Hz",
 	"version": "1.0",
 	"license": "-",
 	"price": 0,
-	"screenshots": [
-		"callflows_1.png",
-		"callflows_2.png",
-		"callflows_3.png"
-	],
 	"urls": {
 		"documentation": "{documentation_url}",
 		"howto": "{howto_video_url}"
 	},
-	"phase": "gold",
+	"phase": "beta",
 	"pvt_type": "app"
 }
