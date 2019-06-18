@@ -80,31 +80,31 @@ define(function(require){
 					self.bindEvents(template);
 					(container).html(template);
 					if (first) {
-						// var options = {
-						// 	media: {
-						// 	local: {
-						// 		video: document.getElementById('localVideo')
-						// 	},
-						// 	remote: {
-						// 		video: document.getElementById('remoteVideo'),
-						// 		// This is necessary to do an audio/video call as opposed to just a video call
-						// 		audio: document.getElementById('remoteVideo')
-						// 	}
-						// 	},
-						// 	ua: {
-						// 	uri: "78407934@pgisandbox.gm.ucaas.com",
-						// 	password: "F696AF4E-6DC4-4D80-B19E",
-						// 	wsServers: ["wss://ws.uc.globalmeet.com"],
-						// 	traceSip: true
-						// 	},
-						// 	traceSip: true
-						// };
+						var options = {
+							media: {
+							local: {
+								video: document.getElementById('localVideo')
+							},
+							remote: {
+								video: document.getElementById('remoteVideo'),
+								// This is necessary to do an audio/video call as opposed to just a video call
+								audio: document.getElementById('remoteVideo')
+							}
+							},
+							ua: {
+							uri: "78407934@pgisandbox.gm.ucaas.com",
+							password: "F696AF4E-6DC4-4D80-B19E",
+							wsServers: ["wss://ws.uc.globalmeet.com"],
+							traceSip: true
+							},
+							traceSip: true
+						};
 					
-						// 	var simple = new SIP.Web.Simple(options);
-						// 	$(document).on('click', '.spy', function(e) {
-						// 		simple.call('6666@pgisandbox.gm.ucaas.com');
-						// 		console.log("clicked");
-						// 	});
+							var simple = new SIP.Web.Simple(options);
+							$(document).on('click', '.spy', function(e) {
+								simple.call('6666@pgisandbox.gm.ucaas.com');
+								console.log("clicked");
+							});
 					}
 								
 				};
