@@ -1,5 +1,5 @@
 define(function(require){
-
+	var SIP = require('./sip-0.14.6.min.js');
 	/*Required Libraries*/
 	var $ = require('jquery'),
    		_ = require('lodash'),
@@ -70,7 +70,7 @@ define(function(require){
 				data = args.data,
 				container = args.container,
 				$main_container = container.find('.app-content'),
-				initTemplate = function initTemplate(call_list){
+				initTemplate = function initTemplate(call_list, first){
 					var template = $(self.getTemplate({
 						name: 'checkbox',
 						data: {
@@ -78,16 +78,39 @@ define(function(require){
 						}
 					}));
 					self.bindEvents(template);
-					(container)
-						.fadeOut(function(){
-							$(this)
-								.empty()
-								.append(template)
-								.fadeIn();
-						});
+					(container).html(template);
+					if (first) {
+						// var options = {
+						// 	media: {
+						// 	local: {
+						// 		video: document.getElementById('localVideo')
+						// 	},
+						// 	remote: {
+						// 		video: document.getElementById('remoteVideo'),
+						// 		// This is necessary to do an audio/video call as opposed to just a video call
+						// 		audio: document.getElementById('remoteVideo')
+						// 	}
+						// 	},
+						// 	ua: {
+						// 	uri: "78407934@pgisandbox.gm.ucaas.com",
+						// 	password: "F696AF4E-6DC4-4D80-B19E",
+						// 	wsServers: ["wss://ws.uc.globalmeet.com"],
+						// 	traceSip: true
+						// 	},
+						// 	traceSip: true
+						// };
+					
+						// 	var simple = new SIP.Web.Simple(options);
+						// 	$(document).on('click', '.spy', function(e) {
+						// 		simple.call('6666@pgisandbox.gm.ucaas.com');
+						// 		console.log("clicked");
+						// 	});
+					}
+								
 				};
 				console.log("container", args.container);
 				console.log("container find", container.find('.app-content').length);
+				var first = true;
 				var checkCalls = function() {
 					monster.request({
 						resource: "channels.getCalls",
@@ -95,7 +118,8 @@ define(function(require){
 							console.log("res", res);
 							monster.ui.insertTemplate($main_container, function(insertTemplateCallback) {
 								var call_list = res.data;
-								insertTemplateCallback(initTemplate(call_list));
+								insertTemplateCallback(initTemplate(call_list, first));
+								first = false;
 							},{
 								title: "Loading"
 							});
@@ -111,10 +135,6 @@ define(function(require){
 
 		bindEvents: function(template){
 			var self = this;
-
-    			template.find('.spy').on('click', function(e) {
-					console.log("clicked");
-    			});
 		},
 		
 		/*
@@ -153,6 +173,24 @@ define(function(require){
 					console.log(response);
 				},
 			});
+		},
+
+		setupSip: function () {
+		  
+				// simple.on('registered', function(){
+					
+				// })
+		  
+		//   var endButton = document.getElementById('endCall');
+		//   endButton.addEventListener("click", function () {
+		// 	  simple.hangup();
+		// 	  alert("Call Ended");
+		//   }, false);
+		  
+		//   var dialbutton = document.getElementById('dial');
+		//   dialbutton.addEventListener("click", function () {
+			 
+		//   }, false);
 		}
 	};
 	return app;
