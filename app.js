@@ -22,7 +22,7 @@ define(function(require){
 		},
 
 		subscribe: {
-        		/* List of events */
+				/* List of events */
    		},
 
     		load: function(callback){
@@ -112,8 +112,8 @@ define(function(require){
 		bindEvents: function(template){
 			var self = this;
 
-    			template.find('#check').on('click', function(e) {
-				self.setCheckbox();
+    			template.find('.spy').on('click', function(e) {
+					console.log("clicked");
     			});
 		},
 		
