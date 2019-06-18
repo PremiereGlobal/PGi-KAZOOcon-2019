@@ -1,13 +1,10 @@
 <div class="app-content">
-	<form class="form form-horizontal" id="checkbox_form">
-		<div class="control-group">
-			<div class="controls">
-				<input  type="checkbox"
-					id="check"
-					name="example.checkbox"
-					{{#if checkboxstate }}checked="checked"{{/if}}
-				>
-			</div>
-		</div>
-	</form>
+	<h2>Ongoing Calls</h2>
+	<ul class="ongoing-calls">
+		<li class="call">
+			<span class="origin"></span>&gt;---&lt;<span class="receiver"></span><button class="spy">Spy</button>
+		</li>
+	</ul>
+	<div class="softphone">
+	</div>
 </div>				

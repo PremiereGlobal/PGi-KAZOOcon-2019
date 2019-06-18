@@ -1,9 +1,9 @@
 {
-	"name": "hackathon2019",
+	"name": "snowden",
 	"i18n": {
 		"en-US": {
-			"label": "KazooCon 2019",
-			"description": "Demo App",
+			"label": "Snowden",
+			"description": "Definitely not the CIA",
 			"extended_description": "...",
 			"features": [
 			]
@@ -14,7 +14,7 @@
 	],
 	"icon": "Callflows_app.png",
 	"api_url": "//10.26.0.21:8000/v2",
-	"author": "2600Hz",
+	"author": "PGi",
 	"version": "1.0",
 	"license": "-",
 	"price": 0,
